@@ -35,6 +35,9 @@ type testDemo = true extends string | number ? 'abc' : never;
 type union_one = 'abc' | 1 | 2;
 type union_two = 1 | 2 | 'abc';
 type Type_1 = union_one extends union_two ? string : number;
+type single_one = 'abc';
+
+type Type_3 = union_one extends single_one ? string : number;
 
 interface A {
     name: string;
@@ -45,3 +48,13 @@ interface B extends A {
 }
 
 type Type_2 = B extends A ? string : number;
+
+type union_three = 'a' | 'm' | 'b';
+type union_four = [
+    {
+        a: string;
+        b: number;
+    }
+];
+const m: union_four = [{ a: 'a', b: 1 }];
+type test_three = union_four[number];
