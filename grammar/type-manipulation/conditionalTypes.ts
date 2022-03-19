@@ -52,3 +52,9 @@ type returnTypeOne = getReturnType<typeof testReturnTypeFunc>; // type returnTyp
 
 // 用法4
 // Distributive Conditional Types
+// 如果传入的泛型是一个联合类型，那么将会对该联合类型中的每一项进行分支判断操作
+type ToArray<T> = T extends any ? T[] : never;
+type StrAndNum = ToArray<string | number>; // type StrAndNum = string[] | number[]
+//  当然，可以通过给泛型添加中括号的方式来阻止Distributive
+type ToArrayNoDis<T> = [T] extends [any] ? T[] : never;
+type StrAndNumNoDist = ToArrayNoDis<string | number>; // type Str... = (string|number)[]
